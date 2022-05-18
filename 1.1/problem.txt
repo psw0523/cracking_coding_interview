@@ -1,0 +1,3 @@
+Are there duplication?
+Given string, write the code checking whether there are same character on the string.
+And also considering not using additional data structure.
