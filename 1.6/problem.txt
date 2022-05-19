@@ -1,0 +1,4 @@
+Write the method that compress string
+ex> "aaabb" => "a3b2"
+
+if the length of compressed string is longer than the size of original string, just return original string

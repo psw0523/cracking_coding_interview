@@ -1,0 +1,5 @@
+Check making one string same to the other string by just one inserting or removing or replacing.
+# input: mike, Mike => True, by replacing
+# input: mke, make => True, by inserting
+
+Just 1 character can differ. or The same number of characters should be same to len(larger_string) - 1.

@@ -1,0 +1,1 @@
+Check the given string is the permutation of palindrome
