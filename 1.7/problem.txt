@@ -1,0 +1,43 @@
+Matrix rotation
+NxN matrix representing pixels. Each pixel depth is 4bytes.
+Write the method to rotate 90 degree this NxN matrix without using another matrix.
+
+            left (anti-clockwise)
+ex> 1 2 3    =>  3 6 9
+    4 5 6        2 5 8
+    7 8 9        1 4 7
+            right (clockwise)
+             =>  7 4 1
+                 8 5 2
+                 9 6 3
+
+1 2 3
+4 5 6 
+7 8 9
+
+Get the rule
+
+[0][0] -> [2][0]
+[0][1] -> [1][0]
+[0][2] -> [0][0]
+
+0,0 -> 2,0 -> 2,2 -> 0,2 -> 0,0 
+
+
+1 swap 3
+
+3 2 1
+4 5 6 
+7 8 9
+
+2 swap 6
+
+3 6 1
+4 5 2 
+7 8 9
+
+1 swap 9
+
+3 6 9
+4 5 2 
+7 8 1
