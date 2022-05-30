@@ -1,0 +1,14 @@
+Implement Queue using two stacks
+
+stack1
+stack2
+FrontStack = stack1
+FrontStack.push(a)
+FrontStack = stack2
+FrontStack.push(b)
+FrontStack.push(a)
+
+
+queue(a) stack1.push(a)
+queue(b) stack2.push(b), stack2.push(stack1.pop())
+queue(c) stack1.push(c) stack2.pop(): a, stack1.push(stack2.pop())
