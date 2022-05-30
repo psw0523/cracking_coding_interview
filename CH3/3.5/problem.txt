@@ -1,0 +1,10 @@
+Sort Stack: write program to sort stack that the minimum value is on top of it.
+Can use one more stack but, can't copy data from stack to other data structures like array.
+The API of stack is push, pop, is_empty, peek.
+
+stack
+6 3 2 1
+
+v = 7
+tmp
+1 2 3 6 7 8
