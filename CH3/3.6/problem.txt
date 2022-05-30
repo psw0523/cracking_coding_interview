@@ -1,0 +1,2 @@
+Animal Shelter: enqueue, dequeueAny, dequeueDog, dequeueCat
+Can use linkedlist or other queue
