@@ -1,74 +1,122 @@
-class Queue():
-    def __init__(self, capacity):
-        self.capacity = capacity
-        self.buffer = [0] * capacity
-        self.head = 0 # head is read position
-        self.tail = 0 # tail is write position
+from enum import Enum
+
+class LinkedListQueue():
+    def __init__(self):
+        self.head = None
+        self.tail = None
 
     def queue(self, item):
-        self.buffer[self.tail] = item
-        self.tail += 1
-        self.tail %= self.capacity
-        if self.tail == self.head:
-            raise IndexError('Buffer Overflow')
+        if self.head == None:
+            self.head = item
+            self.head.next = self.tail
+        elif self.tail == None:
+            self.tail = item
+            self.tail.next = None
+        else:
+            self.tail.next = item
+            self.tail = item
+            self.tail.next = None
 
     def dequeue(self):
         item = None
-        if self.head != self.tail:
-            item = self.buffer[self.head]
-            self.head += 1
-            self.head %= self.capacity
+        if self.head != None:
+            item = self.head
+            self.head = self.head.next
+        return item
+
+    def dequeue_type(self, item_type):
+        item = self.head
+        prev = item
+        while item != None:
+            if item.type == item_type:
+                if item == self.head:
+                    self.head = self.head.next
+                else:
+                    prev.next = item.next
+                break
+            prev = item
+            item = item.next
         return item
 
     def peek(self):
-        if self.head != self.tail:
-            return self.buffer[self.head]
-        return None
+        item = None
+        if self.head != None:
+            item = self.head
+        return item
 
     def is_empty(self):
-        return self.head == self.tail
+        return self.head == None
+
+    def __str__(self):
+        item = self.head
+        s = ''
+        while item != None:
+            #  s.join(item.name)
+            #  s.join('->')
+            s = s + item.name
+            item = item.next
+            if item is not None:
+                s = s + ' -> '
+        return s
 
 
-class Dog():
-    def __init__(self, name):
+class AnimalType(Enum):
+    Dog = 1
+    Cat = 2
+    Others = 3
+
+
+class Animal():
+    def __init__(self, name, animal_type):
         self.name = name
+        self.type = animal_type
+        self.next = None
 
-
-class Cat():
-    def __init__(self, name):
-        self.name = name
+    def __str__(self):
+        return self.name
 
 
 class AnimalShelter():
     def __init__(self):
-        self.queue = Queue(1000)
-        self.dog_queue = Queue(1000)
-        self.cat_queue = Queue(1000)
+        self.queue = LinkedListQueue()
 
     def enqueue(self, animal):
-        if type(animal) is Dog:
-            self.queue.queue(animal)
-        elif type(animal) is Cat:
+        self.queue.queue(animal)
+        if animal.type is AnimalType.Dog or animal.type is AnimalType.Cat:
             self.queue.queue(animal)
         else:
             raise ValueError('This shelter can protect only dog or cat')
 
     def dequeueAny(self):
-        animal = self.queue.dequeue()
-        if type(animal) is Dog:
-            self.dog_queue.dequeue()
-        else:
-            self.cat_queue.dequeue()
-        return animal
-
-    def dequeueDog(self):
-        if self.dog_queue.is_empty() is False:
-            return self.do_queue.dequeue()
-
-        while type(self.queue.peek()) is Cat:
-            self.cat_queue.queue(self.queue.dequeue())
-
         return self.queue.dequeue()
 
+    def dequeueDog(self):
+        return self.queue.dequeue_type(AnimalType.Dog)
+
     def dequeueCat(self):
-        pass
+        return self.queue.dequeue_type(AnimalType.Cat)
+
+if __name__ == '__main__':
+    animal_shelter = AnimalShelter()
+    animal_shelter.enqueue(Animal("dog1", AnimalType.Dog))
+    animal_shelter.enqueue(Animal("cat1", AnimalType.Cat))
+    animal_shelter.enqueue(Animal("cat2", AnimalType.Cat))
+    animal_shelter.enqueue(Animal("dog2", AnimalType.Dog))
+    animal_shelter.enqueue(Animal("dog3", AnimalType.Dog))
+    animal_shelter.enqueue(Animal("dog4", AnimalType.Dog))
+    animal_shelter.enqueue(Animal("dog5", AnimalType.Dog))
+    animal_shelter.enqueue(Animal("cat3", AnimalType.Cat))
+    animal_shelter.enqueue(Animal("cat4", AnimalType.Cat))
+    animal_shelter.enqueue(Animal("cat5", AnimalType.Cat))
+    print(animal_shelter.queue)
+    print(animal_shelter.dequeueAny())
+    print(animal_shelter.dequeueDog())
+    print(animal_shelter.dequeueDog())
+    print(animal_shelter.dequeueAny())
+    print(animal_shelter.dequeueCat())
+    print(animal_shelter.dequeueCat())
+    print(animal_shelter.dequeueCat())
+    print(animal_shelter.dequeueCat())
+    print(animal_shelter.dequeueAny())
+    print(animal_shelter.dequeueDog())
+    print(animal_shelter.dequeueDog())
