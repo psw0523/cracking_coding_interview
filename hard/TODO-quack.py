@@ -12,3 +12,13 @@ such that three operations are possible:
 Implement a quack using three stacks and O(1) additional memory, so that
 the armotized time for any push,pop, or pull operation is O(1).
 '''
+
+'''
+Solution
+
+완전 신박한 방법은 없다.
+
+hint: left, right, buffer(tmp), balance() function
+'''
+
+
